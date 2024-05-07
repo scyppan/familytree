@@ -1,0 +1,25 @@
+svg {
+    position: absolute;
+    left: 60px; /* Adjust based on the width of the side-panel */
+    top: 10px;
+    width: calc(100% - 220px); /* Adjust to account for side-panel */
+    height: 600px;
+}
+
+.node circle {
+    fill: #6699cc;
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+
+.node text {
+    font: 12px sans-serif;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
+}
