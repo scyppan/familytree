@@ -1,9 +1,11 @@
 svg {
     position: absolute;
-    left: 60px; /* Adjust based on the width of the side-panel */
+    left: 10px; /* Adjust based on the width of the side-panel */
     top: 10px;
-    width: calc(100% - 220px); /* Adjust to account for side-panel */
-    height: 600px;
+}
+
+.fade {
+    background-color: #919191;
 }
 
 .node circle {
@@ -22,4 +24,45 @@ svg {
     fill: none;
     stroke: #ccc;
     stroke-width: 2px;
+}
+
+.side-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 215px; /* Adjust as needed */
+    height: 100%;
+    background-color: #e0d7bd;
+    padding: 20px;
+    box-sizing: border-box;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    z-index: 2;
+}
+
+/* Style for the content inside the side panel */
+.side-panel h2 {
+    margin-top: 0;
+}
+
+.side-panel p {
+    margin-bottom: 0;
+}
+
+/* Ensure the parent text and link button align horizontally */
+#birthingParentContainer,
+#secondParentContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Optional: Adds a gap between text and button */
+}
+
+#birthingParent,
+#secondParent {
+    white-space: nowrap;
+}
+
+#birthingParentContainer button,
+#secondParentContainer button {
+    cursor: pointer;
 }

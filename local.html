@@ -6,11 +6,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div id="sidePanel" class="side-panel">
+        <!-- Content of the side panel goes here -->
+        <h2>Side Panel</h2>
+        <button id="addNodeButton" onclick="addNewNode()" disabled="true">Add Node</button>
+        <br><hr><hr>
+        <form id="nodeForm">
+            <label for="nodeName">Name:</label>
+            <input type="text" id="nodeName" name="name"><br><br>
+        
+            <label>Birthing Parent:</label>
+            <div id="birthingParentContainer">
+                <span id="birthingParent"></span>
+                <button type="button" onclick="linkParent('birthingParent')">🔗</button>
+            </div><br>
+        
+            <label>Second Parent:</label>
+            <div id="secondParentContainer">
+                <span id="secondParent"></span>
+                <button type="button" onclick="linkParent('secondParent')">🔗</button>
+            </div><br>
+
+            <label for="birthdate">Birth Date:</label>
+            <input type="date" id="birthdate" name="birthdate"><br><br>
+        
+            <label for="notes">Notes:</label>
+            <textarea id="notes" name="notes"></textarea><br>
+        
+
+        </form>       
+    </div>
     <svg width="800" height="600"></svg>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="data.js"></script>
     <script src="main.js"></script>
-    <script src="newnode.js"></script>
+    <script src="nodelink.js"></script>
+    <script src="sidepanel.js"></script>
 </body>
 </html>

@@ -1,4 +1,7 @@
+let isInLinkMode=false;
+
 function newnode(type, source){
+
     if(type == "child"){
         let child = "new child";
         if(child != null){
@@ -15,3 +18,21 @@ function newnode(type, source){
 
     loadgraph();
 }
+
+function enterlinkmode(svg, source) {
+    let isInLinkMode = true;
+    svg.attr("class", "fade");
+
+    const circleElements = svg.selectAll("circle");
+    console.log("Number of circles found:", circleElements.size());
+
+    circleElements.on("click", function() {
+        const clickedCircle = d3.select(this);
+        let nodeid = this.parentElement.childNodes[1].textContent;
+        
+        console.log("Clicked on circle with id:", nodeid);
+        
+    });
+}
+
+
