@@ -1,29 +1,37 @@
 let simulation = null;
 
 function loadgraph() {
-
+    
     d3.select("svg").selectAll("*").remove();
 
     let svg = d3.select("svg"),
         width = +svg.attr("width"),
         height = +svg.attr("height");
 
-        const levelScale = d3.scaleOrdinal()
-        .domain([1, 2, 3]) // Levels as defined in your nodes
-        .range([height * 0.2, height * 0.5, height * 0.8]); // Adjust these values as needed
+        const levelScale = d3.scaleLinear()
+        .domain([1, 3]) // Levels as defined in your nodes
+        .range([50, height-50]); // Adjust these values as needed
 
         simulation=null;
         simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(links).id(d => d.id).distance(75))
-            .force("charge", d3.forceManyBody().strength(-400))
-            .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("y", d3.forceY(d => levelScale(d.level)).strength(0.05))
-            .on("tick", () => {
-                // Your existing tick handler logic
-            })
-            .on("end", () => {
-                document.getElementById("addNodeButton").disabled=false;
-            });
+        .force("link", d3.forceLink(links).id(d => d.id).distance(15))
+        .force("charge", d3.forceManyBody().strength(-2000))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+    .force("y", d3.forceY(d => levelScale(d.level)).strength(.1))
+    .on("tick", () => {
+        const link = svg.selectAll(".link");
+            const node = svg.selectAll(".node");
+            link.attr("d", d => `M${d.source.x},${d.source.y}L${d.target.x},${d.target.y}`);
+            node.attr("transform", d => `translate(${d.x},${d.y})`);
+    })
+    .on("end", () => {
+        document.getElementById("addNodeButton").disabled = false;
+    });
+
+    console.log("Node levels and projected y-positions:");
+nodes.forEach(node => {
+    console.log(`${node.id}: Level ${node.level}, Y ${levelScale(node.level)}`);
+});
 
     // Create links as paths
     const link = svg.append("g")
@@ -67,8 +75,6 @@ function loadgraph() {
 
         node.on("click", function(event, d) {
             event.stopPropagation();  // Prevent the click from bubbling up to the document level
-        
-            
         
             // Populate the side panel
             document.getElementById('nodeName').value = d.id;

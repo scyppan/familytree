@@ -11,13 +11,14 @@ function saveNodeDetails() {
     }
 }
 
-function populateForm(d) {
-    document.getElementById('nodeName').value = d.id;
-    document.getElementById('nodeName').dataset.nodeId = d.id;
-    document.getElementById('birthingParent').textContent = d.birthingparent || 'None';
-    document.getElementById('secondParent').textContent = d.parent2 || 'None';
-    document.getElementById('birthdate').value = d.birthdate || '';
-    document.getElementById('notes').value = d.notes || '';
+function populateForm(node) {
+    document.getElementById('nodeName').value = node.id;
+    document.getElementById('nodeName').dataset.nodeId = node.id;
+    document.getElementById('birthingParent').textContent = node.birthingparent || '';
+    document.getElementById('secondParent').textContent = node.parent2 || '';
+    document.getElementById('birthdate').value = node.birthdate || '';
+    document.getElementById('level').value = node.level || 1; // Assuming default level is 1
+    document.getElementById('notes').value = node.notes || '';
 }
 
 function linkParent(parentType) {
@@ -54,3 +55,18 @@ function updateNodeDetails() {
         loadgraph();  // Re-render the graph with updated data
     }
 }
+
+document.getElementById('level').addEventListener('change', function() {
+    document.getElementById("addNodeButton").disabled = true;
+    const nodeId = document.getElementById('nodeName').dataset.nodeId;
+    const newLevel = +this.value;
+    
+    // Find the node and update its level
+    const node = nodes.find(n => n.id === nodeId);
+    if (node) {
+        node.level = newLevel;
+
+        // Re-run the simulation to reflect the new level positioning
+        simulation.nodes(nodes).alpha(1).restart();
+    }
+});

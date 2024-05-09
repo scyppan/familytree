@@ -1,7 +1,13 @@
+body{
+    background-color: #e0d7bd;
+}
+
 svg {
     position: absolute;
     left: 10px; /* Adjust based on the width of the side-panel */
-    top: 10px;
+    height: 8000%;
+    width: 100%;
+    background-color: rgb(238, 233, 219);
 }
 
 .fade {
