@@ -3,9 +3,6 @@ let simulation = null;
 function loadgraph() {
 
     links=generateLinks();
-
-    console.log("nodes",nodes);
-    console.log("links",links);
     
     d3.select("svg").selectAll("*").remove();
 

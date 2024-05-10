@@ -23,8 +23,6 @@ function populateForm(node) {
     document.getElementById('notes').value = node.notes || '';
 }
 
-
-
 function setupAutoSave() {
     document.getElementById('nodeName').addEventListener('change', updateNodeDetails);
     document.getElementById('birthdate').addEventListener('change', updateNodeDetails);
@@ -35,16 +33,24 @@ function setupAutoSave() {
 
 function updateNodeDetails() {
     const nodeId = document.getElementById('nodeName').dataset.nodeId;
-    const node = nodes.find(n => n.id === nodeId);
-    if (node) {
-        node.id = document.getElementById('nodeName').value;
-        node.birthdate = document.getElementById('birthdate').value;
-        node.notes = document.getElementById('notes').value;
+    const newNodeId = document.getElementById('nodeName').value;
 
-        // Assuming you need to update the graph or UI
-        loadgraph();  // Re-render the graph with updated data
+    nodes.forEach(node => {
+        if (node.birthingparent === nodeId) {
+            node.birthingparent = newNodeId;  
+        }
+        if (node.parent2 === nodeId) {
+            node.parent2 = newNodeId;  
+        }
+        if(node.id===nodeId){
+            node.id=newNodeId;
+            node.birthdate = document.getElementById('birthdate').value;
+            node.notes = document.getElementById('notes').value;
+        }
+    });
+
+        loadgraph();
     }
-}
 
 document.getElementById('level').addEventListener('change', function() {
     document.getElementById("addNodeButton").disabled = true;
