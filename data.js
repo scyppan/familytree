@@ -5,6 +5,8 @@ let nodes = [
     { id: 'Harry Potter', birthingparent: 'Lily Potter', parent2: 'James Potter I', level: 3, birthdate: '1980-07-31', notes: 'The boy who lived' }
 ];
 
+let links=[];
+
 function addNewNode() {
     document.getElementById("addNodeButton").disabled=true;
     const newNodeId = 'NewNode' + (nodes.length + 1);
@@ -20,21 +22,20 @@ function addNewNode() {
     };
     nodes.push(newNode);
 
-    links = generateLinks(nodes);
+    links = generateLinks();
     loadgraph();
 }
 
-function generateLinks(nodes) {
-    const links = [];
+function generateLinks() {
+    let newLinks = [];
     nodes.forEach(node => {
         if (node.birthingparent) {
-            links.push({ source: node.birthingparent, target: node.id });
+            newLinks.push({ source: node.birthingparent, target: node.id });
         }
         if (node.parent2) {
-            links.push({ source: node.parent2, target: node.id });
+            newLinks.push({ source: node.parent2, target: node.id });
         }
     });
+    links = newLinks; // Make sure this updates the global links array
     return links;
 }
-
-let links = generateLinks(nodes);

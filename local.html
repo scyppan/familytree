@@ -3,7 +3,14 @@
 <head>
     <title>Tree Maker</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" defer>
+    <script src="https://d3js.org/d3.v6.min.js" defer></script>
+    <script src="data.js" defer></script>
+    <script src="main.js" defer></script>
+    <script src="nodelink.js" defer></script>
+    <script src="sidepanel.js" defer></script>
+    <script src="clickevents.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/scyppan/scyppan@v0.0.34/scyppan.js" defer></script>
 </head>
 <body>
     <div id="sidePanel" class="side-panel">
@@ -11,6 +18,8 @@
         <h2>Side Panel</h2>
         <button id="addNodeButton" onclick="addNewNode()" disabled="true">Add Node</button>
         <br><hr><hr>
+        <div id="placeholder-sidepanel">Node editing options will show here</div>
+        <div id="sidepanel-form-container" class="hidden">
         <form id="nodeForm">
             <label for="nodeName">Name:</label>
             <input type="text" id="nodeName" name="name"><br><br>
@@ -18,13 +27,13 @@
             <label>Birthing Parent:</label>
             <div id="birthingParentContainer">
                 <span id="birthingParent"></span>
-                <button type="button" onclick="linkParent('birthingParent')">🔗</button>
+                <button type="button" id="linkBirthingParentButton" onclick="manageclick('startlinkmode','birthingParent',document.getElementById('nodeName').dataset.nodeId)">🔗</button>
             </div><br>
         
             <label>Second Parent:</label>
             <div id="secondParentContainer">
                 <span id="secondParent"></span>
-                <button type="button" onclick="linkParent('secondParent')">🔗</button>
+                <button type="button" id="linkSecondParentButton" onclick="manageclick('startlinkmode','secondParent',document.getElementById('nodeName').dataset.nodeId)">🔗</button>
             </div><br>
         
             <label for="birthdate">Birth Date:</label>
@@ -35,13 +44,10 @@
         
             <label for="notes">Notes:</label>
             <textarea id="notes" name="notes"></textarea><br>
-        </form>     
+        </form></div> 
     </div>
-    <svg width="800" height="600"></svg>
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="data.js"></script>
-    <script src="main.js"></script>
-    <script src="nodelink.js"></script>
-    <script src="sidepanel.js"></script>
+    <div id="linkmodelabel" class="hidden">Link mode active <button onclick="manageclick('exitlinkmode',null, null)">Exit Link Mode</button></div>
+    <svg id="graph" width="1000" height="600"></svg>
+    
 </body>
 </html>

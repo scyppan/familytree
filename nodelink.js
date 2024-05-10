@@ -1,4 +1,6 @@
-let isInLinkMode=false;
+let linkMode = false;
+let linkSource = null; //which node asked to enter link mode
+let linkType = null; //birthingParent or secondParent
 
 function newnode(type, source){
 
@@ -15,24 +17,35 @@ function newnode(type, source){
             links.push({source: parent, target: source.id});
         }
     }
-
     loadgraph();
 }
 
-function enterlinkmode(svg, source) {
-    let isInLinkMode = true;
-    svg.attr("class", "fade");
+function enterLinkMode() {
 
-    const circleElements = svg.selectAll("circle");
-    console.log("Number of circles found:", circleElements.size());
-
-    circleElements.on("click", function() {
-        const clickedCircle = d3.select(this);
-        let nodeid = this.parentElement.childNodes[1].textContent;
-        
-        console.log("Clicked on circle with id:", nodeid);
-        
-    });
+    document.getElementById("graph").classList.add("fade");
+    document.getElementById("linkmodelabel").classList.remove("hidden");
+    document.getElementById("addNodeButton").classList.add("hidden");
+    document.getElementById("nodeName").disabled=true;
+    document.getElementById("linkBirthingParentButton").disabled=true;
+    document.getElementById("linkSecondParentButton").disabled=true;
+    document.getElementById("birthdate").disabled=true;
+    document.getElementById("level").disabled=true;
+    document.getElementById("notes").disabled=true;
 }
 
+function exitLinkMode(){
+    document.getElementById("graph").classList.remove("fade");
+    document.getElementById("linkmodelabel").classList.add("hidden");
+    document.getElementById("addNodeButton").classList.remove("hidden");
+    document.getElementById("nodeName").disabled=false;
+    document.getElementById("linkBirthingParentButton").disabled=false;
+    document.getElementById("linkSecondParentButton").disabled=false;
+    document.getElementById("birthdate").disabled=false;
+    document.getElementById("level").disabled=false;
+    document.getElementById("notes").disabled=false;
+
+    linkMode=false;
+    linkSource=null;
+    linkType=null;
+}
 

@@ -12,6 +12,8 @@ function saveNodeDetails() {
 }
 
 function populateForm(node) {
+    document.getElementById("placeholder-sidepanel").classList.add("hidden");
+    document.getElementById("sidepanel-form-container").classList.remove("hidden");
     document.getElementById('nodeName').value = node.id;
     document.getElementById('nodeName').dataset.nodeId = node.id;
     document.getElementById('birthingParent').textContent = node.birthingparent || '';
@@ -21,19 +23,7 @@ function populateForm(node) {
     document.getElementById('notes').value = node.notes || '';
 }
 
-function linkParent(parentType) {
-    const nodeId = document.getElementById('nodeName').dataset.nodeId;
-    const node = nodes.find(n => n.id === nodeId);
-    if (!node) return;
 
-    if (parentType === 'birthingParent') {
-        console.log("Linking birthing parent for", node.id);
-        // Implement logic to link birthing parent
-    } else if (parentType === 'secondParent') {
-        console.log("Linking second parent for", node.id);
-        // Implement logic to link second parent
-    }
-}
 
 function setupAutoSave() {
     document.getElementById('nodeName').addEventListener('change', updateNodeDetails);
