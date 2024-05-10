@@ -39,3 +39,27 @@ function generateLinks() {
     links = newLinks; // Make sure this updates the global links array
     return links;
 }
+
+async function loaddata(){
+    // Access the file input element
+    const fileInput = document.getElementById('loaddata');
+      
+    // Check if a file is selected
+    if (fileInput.files && fileInput.files[0]) {
+        // Retrieve the file object
+        const file = fileInput.files[0];
+        
+        try {
+            // Await the result from the `readjson` function
+            const jsonData = await readjson(file);
+            nodes=jsonData;
+            loadgraph();
+            
+            // Here, you can handle the JSON data as needed in your application
+        } catch (error) {
+            console.error('Error reading file:', error);
+        }
+    } else {
+        console.log('No file selected');
+    }
+}
