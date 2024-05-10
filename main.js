@@ -100,3 +100,16 @@ document.addEventListener('DOMContentLoaded', function() {
     setupAutoSave(); // Set up auto-save functionality when the page has loaded
 });
 
+window.addEventListener('beforeunload', function (e) {
+   
+        const confirmationMessage = 'Woah there partner!! You have autosave turned off. Are you sure you want to leave? You risk losing all your work from this session';
+        e.preventDefault(); 
+        e.returnValue = confirmationMessage;
+
+        const now = new Date();
+        const datetimeString = `${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}-${now.getHours().toString().padStart(2, '0')}${now.getMinutes().toString().padStart(2, '0')}${now.getSeconds().toString().padStart(2, '0')}`;
+
+        downloadjson(nodes, "familytree-autosave-" + datetimeString+".json");
+        return confirmationMessage; 
+    
+  });

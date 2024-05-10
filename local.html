@@ -6,16 +6,18 @@
     <link rel="stylesheet" href="style.css" defer>
     <script src="https://d3js.org/d3.v6.min.js" defer></script>
     <script src="data.js" defer></script>
-    <script src="main.js" defer></script>
     <script src="nodelink.js" defer></script>
     <script src="sidepanel.js" defer></script>
     <script src="clickevents.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/gh/scyppan/scyppan@v0.0.34/scyppan.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/scyppan/scyppan@v0.0.35/scyppan.js" defer></script>
+    <script src="main.js" defer></script>
 </head>
 <body>
     <div id="sidePanel" class="side-panel">
         <!-- Content of the side panel goes here -->
         <h2>Side Panel</h2>
+        <input id="autosave-chx" type="checkbox" checked="true">
+        <label for="autosave-chx">Autosave</label><br>
         <button id="addNodeButton" onclick="addNewNode()" disabled="true">Add Node</button>
         <br><hr><hr>
         <div id="placeholder-sidepanel">Node editing options will show here</div>
